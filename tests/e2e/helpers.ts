@@ -1,6 +1,6 @@
 import { expect, type Page } from "@playwright/test";
 
-const MAILPIT = "http://127.0.0.1:54324";
+const MAILPIT = "http://127.0.0.1:44324";
 export const PASSWORD = "Str0ngPassw0rd!x";
 
 export async function confirmationLink(email: string): Promise<string> {
@@ -30,7 +30,7 @@ export async function confirmationLink(email: string): Promise<string> {
 export async function signUpAndConfirm(page: Page, email: string) {
   await page.goto("/signup");
   await page.getByLabel("Correo electrónico").fill(email);
-  await page.getByLabel("Contraseña").fill(PASSWORD);
+  await page.getByLabel("Contraseña", { exact: true }).fill(PASSWORD);
   await page.getByRole("button", { name: "Crear cuenta" }).click();
   await expect(page.getByRole("status")).toContainText(
     "enlace de verificación",
@@ -42,6 +42,6 @@ export async function signUpAndConfirm(page: Page, email: string) {
 export async function logIn(page: Page, email: string) {
   await page.goto("/login");
   await page.getByLabel("Correo electrónico").fill(email);
-  await page.getByLabel("Contraseña").fill(PASSWORD);
+  await page.getByLabel("Contraseña", { exact: true }).fill(PASSWORD);
   await page.getByRole("button", { name: "Iniciar sesión" }).click();
 }

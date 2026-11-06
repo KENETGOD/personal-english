@@ -6,7 +6,7 @@ const port = 3100;
 // E2E always targets the LOCAL Supabase stack (npx supabase start). These are the fixed, public
 // local-demo values; process env takes precedence over .env.local, so the remote project is never used.
 const localSupabaseEnv = {
-  NEXT_PUBLIC_SUPABASE_URL: "http://127.0.0.1:54321",
+  NEXT_PUBLIC_SUPABASE_URL: "http://127.0.0.1:44321",
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:
     "sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH",
 };
