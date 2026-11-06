@@ -27,8 +27,30 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+
+  # Database tests (pgTAP) and E2E run against a local Supabase stack, never a hosted project.
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: supabase/setup-cli@v1
+        with:
+          version: 3.0.0
+      - run: supabase start
+      - run: supabase db reset
+      - run: supabase test db
       - run: npx playwright install --with-deps chromium
+      # playwright.config.ts points the app at the local stack and builds it.
       - run: npm run test:e2e
+        env:
+          CI: "1"
+      - if: always()
+        run: supabase stop --no-backup
       - if: failure()
         uses: actions/upload-artifact@v4
         with:

@@ -1,6 +1,15 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const port = 3000;
+// Not 3000, so a developer server (possibly pointed at the remote project) never collides with E2E.
+const port = 3100;
+
+// E2E always targets the LOCAL Supabase stack (npx supabase start). These are the fixed, public
+// local-demo values; process env takes precedence over .env.local, so the remote project is never used.
+const localSupabaseEnv = {
+  NEXT_PUBLIC_SUPABASE_URL: "http://127.0.0.1:54321",
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:
+    "sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH",
+};
 
 export default defineConfig({
   testDir: "./tests/e2e",
@@ -17,10 +26,14 @@ export default defineConfig({
     },
   ],
   webServer: {
+    // NEXT_PUBLIC_* values are inlined at build time, so CI builds with the local env too.
     command: process.env.CI
-      ? `npm run start -- -p ${port}`
+      ? `npm run build && npm run start -- -p ${port}`
       : `npm run dev -- -p ${port}`,
     url: `http://localhost:${port}`,
-    reuseExistingServer: !process.env.CI,
+    env: localSupabaseEnv,
+    timeout: 240_000,
+    // Never reuse a server that may be pointing at the remote project.
+    reuseExistingServer: false,
   },
 });

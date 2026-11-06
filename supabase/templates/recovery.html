@@ -1,0 +1,12 @@
+<h2>Restablece tu contraseña</h2>
+<p>
+  Usa este enlace para elegir una contraseña nueva. Es de un solo uso y expira
+  pronto:
+</p>
+<p>
+  <a
+    href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=recovery"
+    >Restablecer contraseña</a
+  >
+</p>
+<p>Si no lo solicitaste, ignora este mensaje.</p>
