@@ -21,7 +21,7 @@ test("sign up, confirm by email, log out and log in", async ({
 
   await page.goto("/signup");
   await page.getByLabel("Correo electrónico").fill(email);
-  await page.getByLabel("Contraseña").fill(PASSWORD);
+  await page.getByLabel("Contraseña", { exact: true }).fill(PASSWORD);
   await page.getByRole("button", { name: "Crear cuenta" }).click();
   await expect(page.getByRole("status")).toContainText(
     "enlace de verificación",
@@ -30,7 +30,7 @@ test("sign up, confirm by email, log out and log in", async ({
   // No access before the email is confirmed (RF-AUTH-01), and no hint about why.
   await page.goto("/login");
   await page.getByLabel("Correo electrónico").fill(email);
-  await page.getByLabel("Contraseña").fill(PASSWORD);
+  await page.getByLabel("Contraseña", { exact: true }).fill(PASSWORD);
   await page.getByRole("button", { name: "Iniciar sesión" }).click();
   await expect(page.locator("form [role=alert]")).toHaveText(
     "Correo o contraseña incorrectos.",
@@ -49,19 +49,22 @@ test("sign up, confirm by email, log out and log in", async ({
   await expect(page).toHaveURL(/\/login$/);
 
   await page.getByLabel("Correo electrónico").fill(email);
-  await page.getByLabel("Contraseña").fill(PASSWORD);
+  await page.getByLabel("Contraseña", { exact: true }).fill(PASSWORD);
   await page.getByRole("button", { name: "Iniciar sesión" }).click();
   await expect(page).toHaveURL(/\/settings$/);
 
   // Settings round trip.
   await page.getByLabel("Nombre").fill("Ana");
-  await page.getByLabel("Meta diaria").selectOption("20");
-  await page.getByLabel("Acento de referencia").selectOption("en-GB");
+  // Choice chips hide the native radio; force the click through the label.
+  await page.getByRole("radio", { name: "20 min" }).check({ force: true });
+  await page
+    .getByRole("radio", { name: "Británico (en-GB)" })
+    .check({ force: true });
   await page.getByRole("button", { name: "Guardar cambios" }).click();
   await expect(page.getByRole("status")).toHaveText("Cambios guardados.");
   await page.reload();
   await expect(page.getByLabel("Nombre")).toHaveValue("Ana");
-  await expect(page.getByLabel("Meta diaria")).toHaveValue("20");
+  await expect(page.getByRole("radio", { name: "20 min" })).toBeChecked();
 
   await page.getByRole("button", { name: "Cerrar sesión" }).click();
   await expect(page).toHaveURL(/\/login$/);

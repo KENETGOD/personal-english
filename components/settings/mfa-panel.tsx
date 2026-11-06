@@ -7,18 +7,18 @@ import {
   verifyEnrollment,
   type EnrollState,
 } from "@/actions/mfa";
+import { SettingsSection } from "@/components/settings/section";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Label } from "@/components/ui/label";
 
 export function MfaPanel({ factorId }: { factorId: string | null }) {
   return (
-    <section aria-labelledby="mfa-title" className="flex flex-col gap-4">
-      <h2 id="mfa-title" className="text-lg font-semibold">
-        Verificación en dos pasos
-      </h2>
+    <SettingsSection id="security-title" title="Seguridad">
+      <h3 className="font-bold">Verificación en dos pasos</h3>
       {factorId ? <DisableTotp factorId={factorId} /> : <EnrollTotp />}
-    </section>
+    </SettingsSection>
   );
 }
 
@@ -35,7 +35,7 @@ function EnrollTotp() {
         </p>
         <Button
           type="button"
-          variant="outline"
+          variant="secondary"
           disabled={starting}
           onClick={() =>
             startTransition(async () => setEnroll(await enrollTotp()))
@@ -44,7 +44,7 @@ function EnrollTotp() {
           Activar verificación en dos pasos
         </Button>
         {enroll && !enroll.ok && (
-          <p role="alert" className="text-sm text-destructive">
+          <p role="alert" className="text-sm font-bold text-destructive">
             {enroll.error.message}
           </p>
         )}
@@ -64,7 +64,7 @@ function EnrollTotp() {
         alt="Código QR para la app de autenticación"
         width={192}
         height={192}
-        className="self-start rounded-lg border bg-white p-2"
+        className="self-start rounded-lg border-2 bg-white p-2"
       />
       <p className="text-sm text-muted-foreground">
         ¿No puedes escanear? Clave manual:{" "}
@@ -87,7 +87,7 @@ function EnrollTotp() {
         Confirmar y activar
       </Button>
       {state && !state.ok && (
-        <p role="alert" className="text-sm text-destructive">
+        <p role="alert" className="text-sm font-bold text-destructive">
           {state.error.message}
         </p>
       )}
@@ -107,19 +107,18 @@ function DisableTotp({ factorId }: { factorId: string }) {
       <input type="hidden" name="factorId" value={factorId} />
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="disable-password">Contraseña</Label>
-        <Input
+        <PasswordInput
           id="disable-password"
           name="password"
-          type="password"
           autoComplete="current-password"
           required
         />
       </div>
-      <Button type="submit" variant="outline" disabled={pending}>
+      <Button type="submit" variant="secondary" disabled={pending}>
         Desactivar verificación en dos pasos
       </Button>
       {state && !state.ok && (
-        <p role="alert" className="text-sm text-destructive">
+        <p role="alert" className="text-sm font-bold text-destructive">
           {state.error.message}
         </p>
       )}

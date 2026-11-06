@@ -58,7 +58,7 @@ test("TOTP: enroll, require on login, disable with password", async ({
   await expect(page).toHaveURL(/\/settings$/);
 
   // Disabling requires the password on top of the AAL2 session.
-  await page.getByLabel("Contraseña").fill("WrongPassw0rd!x");
+  await page.getByLabel("Contraseña", { exact: true }).fill("WrongPassw0rd!x");
   await page
     .getByRole("button", { name: "Desactivar verificación en dos pasos" })
     .click();
@@ -66,7 +66,7 @@ test("TOTP: enroll, require on login, disable with password", async ({
     "Contraseña incorrecta.",
   );
 
-  await page.getByLabel("Contraseña").fill(PASSWORD);
+  await page.getByLabel("Contraseña", { exact: true }).fill(PASSWORD);
   await page
     .getByRole("button", { name: "Desactivar verificación en dos pasos" })
     .click();

@@ -1,18 +1,32 @@
+import Link from "next/link";
 import { signOut } from "@/actions/auth";
+import { AppNav } from "@/components/app/app-nav";
+import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 
 export default function AppLayout({ children }: LayoutProps<"/">) {
   return (
     <>
-      <header className="flex items-center justify-between border-b px-4 py-3">
-        <span className="font-semibold">English Coach</span>
-        <form action={signOut}>
-          <Button type="submit" variant="outline" size="sm">
-            Cerrar sesión
-          </Button>
-        </form>
+      <header className="sticky top-0 z-40 border-b-2 bg-background/90 pt-[env(safe-area-inset-top)] backdrop-blur">
+        <div className="flex h-14 items-center justify-between px-4">
+          {/* Settings is the only signed-in route today; F2 points this at the new home screen. */}
+          <Link
+            href="/settings"
+            className="rounded-lg outline-none focus-visible:ring-4 focus-visible:ring-ring/40"
+          >
+            <Logo />
+          </Link>
+          <form action={signOut}>
+            <Button type="submit" variant="ghost" size="sm">
+              Cerrar sesión
+            </Button>
+          </form>
+        </div>
       </header>
-      {children}
+      <AppNav />
+      <div className="flex flex-1 flex-col pb-[calc(5rem+env(safe-area-inset-bottom))] lg:pb-8 lg:pl-60">
+        {children}
+      </div>
     </>
   );
 }

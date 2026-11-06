@@ -2,13 +2,23 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+/* Dark follows the OS by default; the .dark / .light classes force a theme. */
+@custom-variant dark {
+  @media (prefers-color-scheme: dark) {
+    &:not(:is(.light *)) {
+      @slot;
+    }
+  }
+  &:is(.dark *) {
+    @slot;
+  }
+}
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans:
+    var(--font-nunito), ui-rounded, "Segoe UI", system-ui, sans-serif;
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -27,6 +37,8 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-shade: var(--destructive-shade);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -34,7 +46,21 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-shade: var(--primary-shade);
   --color-primary: var(--primary);
+  --color-streak: var(--streak);
+  --color-streak-foreground: var(--streak-foreground);
+  --color-streak-shade: var(--streak-shade);
+  --color-mode-vocabulary: var(--mode-vocabulary);
+  --color-mode-vocabulary-foreground: var(--mode-vocabulary-foreground);
+  --color-mode-reading: var(--mode-reading);
+  --color-mode-reading-foreground: var(--mode-reading-foreground);
+  --color-mode-writing: var(--mode-writing);
+  --color-mode-writing-foreground: var(--mode-writing-foreground);
+  --color-mode-speaking: var(--mode-speaking);
+  --color-mode-speaking-foreground: var(--mode-speaking-foreground);
+  --color-mode-mix: var(--mode-mix);
+  --color-mode-mix-foreground: var(--mode-mix-foreground);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -46,75 +72,91 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-card: 1rem;
 }
 
+/*
+ * Tokens: see DESIGN.md. Each is `light-dark(light, dark)`; scripts/check-contrast.mjs parses
+ * this block and asserts every foreground/background pair for both themes.
+ */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  color-scheme: light dark;
+
+  --background: light-dark(oklch(0.985 0.005 95), oklch(0.19 0.015 260));
+  --foreground: light-dark(oklch(0.25 0.02 60), oklch(0.96 0.006 90));
+  --card: light-dark(oklch(1 0 0), oklch(0.24 0.017 260));
+  --card-foreground: light-dark(oklch(0.25 0.02 60), oklch(0.96 0.006 90));
+  --popover: light-dark(oklch(1 0 0), oklch(0.24 0.017 260));
+  --popover-foreground: light-dark(oklch(0.25 0.02 60), oklch(0.96 0.006 90));
+
+  --primary: light-dark(oklch(0.8 0.2 152), oklch(0.78 0.19 152));
+  --primary-foreground: light-dark(oklch(0.24 0.06 155), oklch(0.2 0.05 155));
+  --primary-shade: light-dark(oklch(0.5 0.13 155), oklch(0.7 0.16 152));
+
+  --streak: light-dark(oklch(0.8 0.16 70), oklch(0.78 0.16 70));
+  --streak-foreground: light-dark(oklch(0.3 0.07 50), oklch(0.25 0.06 50));
+  --streak-shade: light-dark(oklch(0.58 0.15 50), oklch(0.7 0.16 60));
+
+  --mode-vocabulary: light-dark(oklch(0.94 0.04 295), oklch(0.3 0.06 295));
+  --mode-vocabulary-foreground: light-dark(
+    oklch(0.42 0.17 295),
+    oklch(0.86 0.09 295)
+  );
+  --mode-reading: light-dark(oklch(0.94 0.04 235), oklch(0.3 0.05 235));
+  --mode-reading-foreground: light-dark(
+    oklch(0.42 0.12 240),
+    oklch(0.86 0.08 235)
+  );
+  --mode-writing: light-dark(oklch(0.95 0.07 95), oklch(0.32 0.05 85));
+  --mode-writing-foreground: light-dark(oklch(0.43 0.09 80), oklch(0.9 0.1 90));
+  --mode-speaking: light-dark(oklch(0.94 0.04 20), oklch(0.31 0.06 20));
+  --mode-speaking-foreground: light-dark(
+    oklch(0.46 0.16 20),
+    oklch(0.87 0.08 20)
+  );
+  --mode-mix: light-dark(oklch(0.94 0.06 152), oklch(0.3 0.06 152));
+  --mode-mix-foreground: light-dark(oklch(0.42 0.11 155), oklch(0.87 0.12 152));
+
+  --secondary: light-dark(oklch(1 0 0), oklch(0.24 0.017 260));
+  --secondary-foreground: light-dark(oklch(0.25 0.02 60), oklch(0.96 0.006 90));
+  --muted: light-dark(oklch(0.96 0.007 90), oklch(0.27 0.017 260));
+  --muted-foreground: light-dark(oklch(0.5 0.02 70), oklch(0.75 0.012 260));
+  --accent: light-dark(oklch(0.95 0.045 152), oklch(0.31 0.05 152));
+  --accent-foreground: light-dark(oklch(0.4 0.1 155), oklch(0.88 0.1 152));
+  --destructive: light-dark(oklch(0.55 0.21 27), oklch(0.72 0.17 25));
+  --destructive-foreground: light-dark(
+    oklch(0.99 0.005 27),
+    oklch(0.2 0.04 25)
+  );
+  --destructive-shade: light-dark(oklch(0.43 0.17 27), oklch(0.56 0.18 25));
+  --border: light-dark(oklch(0.91 0.01 90), oklch(0.33 0.017 260));
+  --input: light-dark(oklch(0.65 0.015 80), oklch(0.55 0.02 260));
+  --ring: light-dark(oklch(0.55 0.14 155), oklch(0.78 0.19 152));
+
+  --chart-1: light-dark(oklch(0.8 0.2 152), oklch(0.78 0.19 152));
+  --chart-2: light-dark(oklch(0.8 0.16 70), oklch(0.78 0.16 70));
+  --chart-3: light-dark(oklch(0.6 0.15 295), oklch(0.72 0.14 295));
+  --chart-4: light-dark(oklch(0.65 0.12 235), oklch(0.74 0.11 235));
+  --chart-5: light-dark(oklch(0.65 0.17 20), oklch(0.74 0.14 20));
+
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+
+  --radius: 0.875rem;
+}
+
+.light {
+  color-scheme: light;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  color-scheme: dark;
 }
 
 @layer base {
@@ -122,9 +164,34 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-sans text-base text-foreground;
   }
   html {
     @apply font-sans;
+  }
+}
+
+@utility text-display {
+  font-size: 2rem;
+  line-height: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+@utility text-section {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

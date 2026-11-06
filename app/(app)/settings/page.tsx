@@ -20,8 +20,8 @@ export default async function SettingsPage() {
   if (!profile) throw new Error("Profile not found");
 
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col gap-10 px-4 py-8">
-      <h1 className="text-2xl font-semibold tracking-tight">Ajustes</h1>
+    <main className="mx-auto flex w-full max-w-[40rem] flex-1 flex-col gap-6 px-4 py-6">
+      <h1 className="text-display">Ajustes</h1>
       <SettingsForm
         initial={{
           displayName: profile.display_name ?? "",
