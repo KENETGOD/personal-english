@@ -1,0 +1,24 @@
+[
+  {
+    "slug": "explain-a-bug",
+    "version": 1,
+    "level": "B1",
+    "topics": ["work", "tech"],
+    "grammar_tags": ["G02", "G05"],
+    "is_active": true,
+    "est_minutes": 8,
+    "title": "Explain a bug to your team",
+    "user_role": "Developer who found a bug in production",
+    "tutor_role": "Team lead who is not technical in this area and asks clarifying questions",
+    "goal": "Explain what happened, the impact and the plan to fix it",
+    "opening_line": "Hey, I heard there was an issue this morning. What happened?",
+    "target_language": [
+      "It turned out that...",
+      "The root cause was...",
+      "We have already...",
+      "To prevent this,..."
+    ],
+    "min_turns": 4,
+    "max_turns": 10
+  }
+]

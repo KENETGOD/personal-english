@@ -1,0 +1,21 @@
+[
+  {
+    "slug": "pairs-i-ee",
+    "version": 1,
+    "level": "B1",
+    "topics": [],
+    "grammar_tags": [],
+    "is_active": true,
+    "est_minutes": 4,
+    "contrast": "/ɪ/ vs /iː/",
+    "tip_es": "Para /iː/ estira los labios como sonriendo y alarga el sonido; /ɪ/ es corto y relajado.",
+    "pairs": [
+      ["ship", "sheep"],
+      ["live", "leave"],
+      ["fill", "feel"],
+      ["bit", "beat"],
+      ["sit", "seat"]
+    ],
+    "sentences": [["Did you see the ship?", "Did you see the sheep?"]]
+  }
+]

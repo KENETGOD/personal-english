@@ -1,0 +1,36 @@
+[
+  {
+    "slug": "g02-present-perfect-vs-past",
+    "version": 1,
+    "level": "B1",
+    "topics": [],
+    "grammar_tags": ["G02"],
+    "is_active": true,
+    "est_minutes": 3,
+    "code": "G02",
+    "title_es": "Present perfect vs past simple",
+    "explanation_es": "Usa past simple cuando dices o se entiende CUÁNDO pasó (yesterday, in 2023). Usa present perfect para experiencias o situaciones que continúan hasta hoy (since, for, ever, already).",
+    "examples": [
+      {
+        "wrong": "I have finished it yesterday.",
+        "right": "I finished it yesterday."
+      },
+      {
+        "wrong": "I work here since 2024.",
+        "right": "I have worked here since 2024."
+      }
+    ],
+    "practice": [
+      {
+        "type": "fix_sentence",
+        "prompt": "I live in Morelia for five years.",
+        "answer": "I have lived in Morelia for five years."
+      },
+      {
+        "type": "produce",
+        "prompt_es": "Di que nunca has visitado Canadá.",
+        "answer": "I have never visited Canada."
+      }
+    ]
+  }
+]

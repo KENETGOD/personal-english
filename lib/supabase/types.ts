@@ -34,6 +34,220 @@ export type Database = {
   };
   public: {
     Tables: {
+      achievements: {
+        Row: {
+          code: string;
+          unlocked_at: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          code: string;
+          unlocked_at?: string;
+          user_id: string;
+        };
+        Update: {
+          code?: string;
+          unlocked_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "achievements_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      content_items: {
+        Row: {
+          est_minutes: number;
+          grammar_tags: string[];
+          id: string;
+          is_active: boolean;
+          level: string;
+          payload: NonNullable<Json>;
+          slug: string;
+          topics: string[];
+          type: string;
+          updated_at: string;
+          version: number;
+        };
+        ComputedFields: never;
+        Insert: {
+          est_minutes: number;
+          grammar_tags?: string[];
+          id?: string;
+          is_active?: boolean;
+          level: string;
+          payload: NonNullable<Json>;
+          slug: string;
+          topics?: string[];
+          type: string;
+          updated_at?: string;
+          version?: number;
+        };
+        Update: {
+          est_minutes?: number;
+          grammar_tags?: string[];
+          id?: string;
+          is_active?: boolean;
+          level?: string;
+          payload?: NonNullable<Json>;
+          slug?: string;
+          topics?: string[];
+          type?: string;
+          updated_at?: string;
+          version?: number;
+        };
+        Relationships: [];
+      };
+      daily_activity: {
+        Row: {
+          active_seconds: number;
+          goal_minutes: number;
+          local_date: string;
+          status: string;
+          user_id: string;
+          xp: number;
+        };
+        ComputedFields: never;
+        Insert: {
+          active_seconds?: number;
+          goal_minutes: number;
+          local_date: string;
+          status?: string;
+          user_id: string;
+          xp?: number;
+        };
+        Update: {
+          active_seconds?: number;
+          goal_minutes?: number;
+          local_date?: string;
+          status?: string;
+          user_id?: string;
+          xp?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "daily_activity_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      exercise_attempts: {
+        Row: {
+          activity_type: string;
+          completed_at: string | null;
+          content_id: string | null;
+          id: string;
+          prompt_version: string | null;
+          score: number | null;
+          session_id: string;
+          started_at: string;
+          status: string;
+          user_id: string;
+          valid_seconds: number;
+          xp: number;
+          _attempt_effort_met: boolean | null;
+        };
+        ComputedFields: "_attempt_effort_met";
+        Insert: {
+          activity_type: string;
+          completed_at?: string | null;
+          content_id?: string | null;
+          id?: string;
+          prompt_version?: string | null;
+          score?: number | null;
+          session_id: string;
+          started_at?: string;
+          status?: string;
+          user_id: string;
+          valid_seconds?: number;
+          xp?: number;
+        };
+        Update: {
+          activity_type?: string;
+          completed_at?: string | null;
+          content_id?: string | null;
+          id?: string;
+          prompt_version?: string | null;
+          score?: number | null;
+          session_id?: string;
+          started_at?: string;
+          status?: string;
+          user_id?: string;
+          valid_seconds?: number;
+          xp?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "exercise_attempts_content_id_fkey";
+            columns: ["content_id"];
+            isOneToOne: false;
+            referencedRelation: "content_items";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "exercise_attempts_session_id_fkey";
+            columns: ["session_id"];
+            isOneToOne: false;
+            referencedRelation: "practice_sessions";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "exercise_attempts_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      practice_sessions: {
+        Row: {
+          ended_at: string | null;
+          id: string;
+          mode: string;
+          plan: NonNullable<Json>;
+          started_at: string;
+          status: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          ended_at?: string | null;
+          id?: string;
+          mode: string;
+          plan?: NonNullable<Json>;
+          started_at?: string;
+          status?: string;
+          user_id: string;
+        };
+        Update: {
+          ended_at?: string | null;
+          id?: string;
+          mode?: string;
+          plan?: NonNullable<Json>;
+          started_at?: string;
+          status?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "practice_sessions_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       profiles: {
         Row: {
           accent: string;
@@ -45,6 +259,7 @@ export type Database = {
           interests: string[];
           new_cards_per_day: number;
           pending_daily_goal: number | null;
+          pending_goal_from: string | null;
           playback_rate: number;
           reminder_time: string | null;
           sublevels: NonNullable<Json>;
@@ -64,6 +279,7 @@ export type Database = {
           interests?: string[];
           new_cards_per_day?: number;
           pending_daily_goal?: number | null;
+          pending_goal_from?: string | null;
           playback_rate?: number;
           reminder_time?: string | null;
           sublevels?: NonNullable<Json>;
@@ -82,6 +298,7 @@ export type Database = {
           interests?: string[];
           new_cards_per_day?: number;
           pending_daily_goal?: number | null;
+          pending_goal_from?: string | null;
           playback_rate?: number;
           reminder_time?: string | null;
           sublevels?: NonNullable<Json>;
@@ -136,6 +353,51 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      _attempt_effort_met: {
+        Args: {
+          p_attempt: Omit<
+            Database["public"]["Tables"]["exercise_attempts"]["Row"],
+            Database["public"]["Tables"]["exercise_attempts"]["ComputedFields"]
+          >;
+        };
+        Returns: boolean;
+      };
+      _complete_attempt: {
+        Args: { p_attempt_id: string; p_now: string; p_uid: string };
+        Returns: Database["public"]["CompositeTypes"]["attempt_result"];
+        SetofOptions: {
+          from: "*";
+          to: "attempt_result";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
+      _register_goal_met: {
+        Args: { p_today: string; p_uid: string };
+        Returns: undefined;
+      };
+      _roll_pending_goal: {
+        Args: { p_today: string; p_uid: string };
+        Returns: number;
+      };
+      _settle_streak: {
+        Args: { p_now: string; p_uid: string };
+        Returns: {
+          current_streak: number;
+          freezes_available: number;
+          last_goal_date: string | null;
+          longest_streak: number;
+          total_days_met: number;
+          updated_at: string;
+          user_id: string;
+        };
+        SetofOptions: {
+          from: "*";
+          to: "streaks";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
       change_daily_goal: {
         Args: { p_minutes: number };
         Returns: {
@@ -148,6 +410,7 @@ export type Database = {
           interests: string[];
           new_cards_per_day: number;
           pending_daily_goal: number | null;
+          pending_goal_from: string | null;
           playback_rate: number;
           reminder_time: string | null;
           sublevels: NonNullable<Json>;
@@ -175,6 +438,7 @@ export type Database = {
           interests: string[];
           new_cards_per_day: number;
           pending_daily_goal: number | null;
+          pending_goal_from: string | null;
           playback_rate: number;
           reminder_time: string | null;
           sublevels: NonNullable<Json>;
@@ -190,12 +454,90 @@ export type Database = {
           isSetofReturn: false;
         };
       };
+      complete_attempt: {
+        Args: { p_attempt_id: string };
+        Returns: Database["public"]["CompositeTypes"]["attempt_result"];
+        SetofOptions: {
+          from: "*";
+          to: "attempt_result";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
+      end_session: {
+        Args: { p_session_id: string };
+        Returns: {
+          ended_at: string | null;
+          id: string;
+          mode: string;
+          plan: NonNullable<Json>;
+          started_at: string;
+          status: string;
+          user_id: string;
+        };
+        SetofOptions: {
+          from: "*";
+          to: "practice_sessions";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
+      settle_streak: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          current_streak: number;
+          freezes_available: number;
+          last_goal_date: string | null;
+          longest_streak: number;
+          total_days_met: number;
+          updated_at: string;
+          user_id: string;
+        };
+        SetofOptions: {
+          from: "*";
+          to: "streaks";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
+      skip_attempt: { Args: { p_attempt_id: string }; Returns: undefined };
+      start_attempt: {
+        Args: {
+          p_activity: string;
+          p_content_id: string;
+          p_session_id: string;
+        };
+        Returns: string;
+      };
+      start_session: {
+        Args: { p_mode: string; p_plan?: Json };
+        Returns: string;
+      };
+      today_progress: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          active_seconds: number;
+          goal_minutes: number;
+          local_date: string;
+          status: string;
+          xp: number;
+        }[];
+      };
     };
     Enums: {
       [_ in never]: never;
     };
     CompositeTypes: {
-      [_ in never]: never;
+      attempt_result: {
+        valid_seconds: number | null;
+        xp: number | null;
+        active_seconds: number | null;
+        goal_minutes: number | null;
+        goal_met: boolean | null;
+        current_streak: number | null;
+        longest_streak: number | null;
+        freezes_available: number | null;
+      };
     };
   };
 };

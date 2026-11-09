@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "shadow-ed-endings-1",
+    "version": 1,
+    "level": "B1",
+    "topics": ["daily-life"],
+    "grammar_tags": [],
+    "is_active": true,
+    "est_minutes": 3,
+    "focus": ["ed_endings"],
+    "sentences": [
+      {
+        "id": "s1",
+        "text": "I worked late and missed the last bus.",
+        "focus_words": ["worked", "missed"]
+      },
+      {
+        "id": "s2",
+        "text": "She wanted to know why we changed the plan.",
+        "focus_words": ["wanted", "changed"]
+      },
+      {
+        "id": "s3",
+        "text": "They played well but needed more practice.",
+        "focus_words": ["played", "needed"]
+      }
+    ]
+  }
+]

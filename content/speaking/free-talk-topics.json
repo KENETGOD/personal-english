@@ -1,0 +1,17 @@
+[
+  {
+    "slug": "talk-recent-challenge",
+    "version": 1,
+    "level": "B1",
+    "topics": ["work"],
+    "grammar_tags": ["G02", "G03"],
+    "is_active": true,
+    "est_minutes": 6,
+    "prompt": "Talk about a challenge you faced recently at work and how you solved it.",
+    "guiding_questions": [
+      "What happened?",
+      "What did you try first?",
+      "What did you learn?"
+    ]
+  }
+]

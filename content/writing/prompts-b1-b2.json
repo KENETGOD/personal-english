@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "email-deadline-extension",
+    "version": 1,
+    "level": "B1",
+    "topics": ["work"],
+    "grammar_tags": ["G04", "G21"],
+    "is_active": true,
+    "est_minutes": 15,
+    "genre": "email",
+    "prompt": "Write an email to your manager asking to move a project deadline by one week. Explain why and propose a plan.",
+    "audience": "your manager",
+    "purpose": "request + justification",
+    "target_words": { "min": 100, "max": 150 },
+    "useful_language": [
+      "Would it be possible to...",
+      "due to...",
+      "In the meantime, I will..."
+    ],
+    "rubric_focus": ["task", "coherence", "grammar_accuracy"]
+  },
+  {
+    "slug": "opinion-remote-work",
+    "version": 1,
+    "level": "B2",
+    "topics": ["work", "culture"],
+    "grammar_tags": ["G11"],
+    "is_active": true,
+    "est_minutes": 20,
+    "genre": "opinion",
+    "prompt": "Do you think most office jobs should be done remotely? Give your opinion and support it with two reasons.",
+    "audience": "readers of a company blog",
+    "purpose": "opinion + arguments",
+    "target_words": { "min": 150, "max": 200 },
+    "useful_language": [
+      "In my opinion...",
+      "On the one hand...",
+      "For this reason..."
+    ],
+    "rubric_focus": ["task", "coherence", "grammar_range", "vocabulary"]
+  }
+]

@@ -1,0 +1,45 @@
+[
+  {
+    "slug": "b1-remote-work",
+    "version": 1,
+    "level": "B1",
+    "topics": ["work"],
+    "grammar_tags": ["G02", "G11"],
+    "is_active": true,
+    "est_minutes": 2,
+    "title": "Working From Home: One Year Later",
+    "word_count": 130,
+    "pre_reading_vocab": ["commute", "get used to", "boundaries", "isolated"],
+    "body": "When my company told us we could work from home permanently, I was excited. I would not have a long commute anymore, and I could sleep an hour more every morning. At first, it was great. But after a few months, I started to feel isolated. I missed the small talk in the kitchen and the quick questions to my teammates. My days also became very long because I did not have clear boundaries between work and free time. I often answered messages at ten at night. Last spring, I decided to change my routine. Now I stop working at six, and twice a week I work from a small café near my house. I still love working from home, but I have learned that I need people around me.",
+    "questions": [
+      {
+        "id": "q1",
+        "type": "gist",
+        "prompt": "What is the main idea of the text?",
+        "answer_type": "open_short",
+        "reference_answer": "The writer likes working from home but learned that a better routine and contact with people are needed."
+      },
+      {
+        "id": "q2",
+        "type": "detail",
+        "prompt": "What did the writer miss the most?",
+        "answer_type": "choice",
+        "options": [
+          "The long commute",
+          "Talking with teammates",
+          "Answering messages",
+          "Sleeping more"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "q3",
+        "type": "inference",
+        "prompt": "Why do you think the writer started going to a café?",
+        "answer_type": "open_short",
+        "reference_answer": "To be around other people and feel less isolated."
+      }
+    ],
+    "summary_task": "Summarize the writer's experience in 2-3 sentences."
+  }
+]

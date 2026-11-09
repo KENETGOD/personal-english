@@ -1,0 +1,90 @@
+[
+  {
+    "slug": "figure-out",
+    "version": 1,
+    "level": "B1",
+    "topics": ["work", "tech"],
+    "grammar_tags": ["G24"],
+    "is_active": true,
+    "est_minutes": 1,
+    "term": "figure out",
+    "kind": "phrasal_verb",
+    "ipa": "/ˈfɪɡjər aʊt/",
+    "definition_en": "to understand or solve something after thinking about it",
+    "translation_es": "descifrar, entender, resolver",
+    "examples": [
+      "It took us two days to figure out why the server kept crashing.",
+      "I can't figure out how this function works."
+    ],
+    "collocations": [
+      "figure out a problem",
+      "figure out why",
+      "figure out how to"
+    ],
+    "cloze": "We still need to ____ ____ why the tests are failing.",
+    "notes_es": "Separable: 'figure it out', no 'figure out it'."
+  },
+  {
+    "slug": "deadline",
+    "version": 1,
+    "level": "B1",
+    "topics": ["work"],
+    "grammar_tags": [],
+    "is_active": true,
+    "est_minutes": 1,
+    "term": "deadline",
+    "kind": "word",
+    "ipa": "/ˈdedlaɪn/",
+    "definition_en": "the time or date by which something must be finished",
+    "translation_es": "fecha límite",
+    "examples": [
+      "The deadline for the report is next Friday.",
+      "We missed the deadline because the requirements changed."
+    ],
+    "collocations": ["meet a deadline", "miss a deadline", "tight deadline"],
+    "cloze": "If we work together, we can meet the ____ on Friday."
+  },
+  {
+    "slug": "take-responsibility-for",
+    "version": 1,
+    "level": "B2",
+    "topics": ["work", "relationships"],
+    "grammar_tags": ["G21"],
+    "is_active": true,
+    "est_minutes": 1,
+    "term": "take responsibility for",
+    "kind": "collocation",
+    "ipa": "/teɪk rɪˌspɑːnsəˈbɪləti fɔːr/",
+    "definition_en": "to accept that you are the one who must deal with something or who caused it",
+    "translation_es": "hacerse responsable de",
+    "examples": [
+      "She took responsibility for the mistake and fixed it the same day.",
+      "Who will take responsibility for the release?"
+    ],
+    "collocations": [
+      "take full responsibility for",
+      "take responsibility for your actions"
+    ],
+    "cloze": "He decided to ____ ____ for the failed launch."
+  },
+  {
+    "slug": "could-you-walk-me-through-it",
+    "version": 1,
+    "level": "B1",
+    "topics": ["work", "tech"],
+    "grammar_tags": ["G05"],
+    "is_active": true,
+    "est_minutes": 1,
+    "term": "Could you walk me through it?",
+    "kind": "phrase",
+    "ipa": "/kʊd juː wɔːk miː θruː ɪt/",
+    "definition_en": "a polite way to ask someone to explain a process step by step",
+    "translation_es": "¿Podrías explicármelo paso a paso?",
+    "examples": [
+      "I'm new to this system. Could you walk me through it?",
+      "Could you walk me through the deployment process?"
+    ],
+    "collocations": ["walk me through", "walk someone through a process"],
+    "cloze": "I don't understand the new tool. Could you ____ me ____ it?"
+  }
+]
