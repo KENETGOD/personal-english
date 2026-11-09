@@ -26,7 +26,7 @@ export async function confirmationLink(email: string): Promise<string> {
   throw new Error(`No confirmation email for ${email}`);
 }
 
-/** Registers a new user and confirms the email; ends on /settings with a session. */
+/** Registers a new user and confirms the email; ends on /home with a session. */
 export async function signUpAndConfirm(page: Page, email: string) {
   await page.goto("/signup");
   await page.getByLabel("Correo electrónico").fill(email);
@@ -36,7 +36,7 @@ export async function signUpAndConfirm(page: Page, email: string) {
     "enlace de verificación",
   );
   await page.goto(await confirmationLink(email));
-  await expect(page).toHaveURL(/\/settings$/);
+  await expect(page).toHaveURL(/\/home$/);
 }
 
 export async function logIn(page: Page, email: string) {

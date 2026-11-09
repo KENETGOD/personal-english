@@ -24,6 +24,7 @@ test("TOTP: enroll, require on login, disable with password", async ({
 }, info) => {
   const email = `e2e-mfa-${info.project.name}-${Date.now()}@example.com`;
   await signUpAndConfirm(page, email);
+  await page.goto("/settings");
 
   await page
     .getByRole("button", { name: "Activar verificación en dos pasos" })
@@ -55,7 +56,8 @@ test("TOTP: enroll, require on login, disable with password", async ({
 
   await page.getByLabel("Código de verificación").fill(totp(secret, 1));
   await page.getByRole("button", { name: "Verificar" }).click();
-  await expect(page).toHaveURL(/\/settings$/);
+  await expect(page).toHaveURL(/\/home$/);
+  await page.goto("/settings");
 
   // Disabling requires the password on top of the AAL2 session.
   await page.getByLabel("Contraseña", { exact: true }).fill("WrongPassw0rd!x");

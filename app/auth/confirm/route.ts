@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 // Landing route of the email links (token_hash flow, see supabase/templates).
 // Destinations are fixed per link type, so there is no open redirect.
 const DESTINATIONS = {
-  email: "/settings",
+  email: "/home",
   recovery: "/reset-password",
 } as const;
 

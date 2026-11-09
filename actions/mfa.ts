@@ -97,7 +97,7 @@ export async function verifyLogin(
     code: code.data,
   });
   if (error) return fail("VALIDATION_ERROR", BAD_CODE);
-  redirect("/settings");
+  redirect("/home");
 }
 
 /** Requires an AAL2 session (requireUser) plus the account password. */

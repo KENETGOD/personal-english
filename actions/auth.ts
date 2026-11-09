@@ -55,7 +55,7 @@ export async function signIn(_: FormState, fd: FormData): Promise<FormState> {
   redirect(
     data?.nextLevel === "aal2" && data.currentLevel !== "aal2"
       ? "/mfa-challenge"
-      : "/settings",
+      : "/home",
   );
 }
 
@@ -108,7 +108,7 @@ export async function resetPassword(
       "No se pudo actualizar la contraseña. Solicita un enlace nuevo.",
     );
   }
-  redirect("/settings");
+  redirect("/home");
 }
 
 export async function signOut() {

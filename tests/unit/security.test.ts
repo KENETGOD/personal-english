@@ -41,11 +41,11 @@ describe("securityHeaders", () => {
 });
 
 describe("isPrivatePath", () => {
-  it.each(["/settings", "/settings/security"])("protects %s", (p) => {
+  it.each(["/home", "/settings", "/settings/security"])("protects %s", (p) => {
     expect(isPrivatePath(p)).toBe(true);
   });
 
-  it.each(["/", "/login", "/settingsfoo", "/auth/confirm"])(
+  it.each(["/", "/login", "/homework", "/settingsfoo", "/auth/confirm"])(
     "leaves %s public",
     (p) => {
       expect(isPrivatePath(p)).toBe(false);

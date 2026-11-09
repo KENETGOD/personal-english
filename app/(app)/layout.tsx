@@ -9,9 +9,8 @@ export default function AppLayout({ children }: LayoutProps<"/">) {
     <>
       <header className="sticky top-0 z-40 border-b-2 bg-background/90 pt-[env(safe-area-inset-top)] backdrop-blur">
         <div className="flex h-14 items-center justify-between px-4">
-          {/* Settings is the only signed-in route today; F2 points this at the new home screen. */}
           <Link
-            href="/settings"
+            href="/home"
             className="rounded-lg outline-none focus-visible:ring-4 focus-visible:ring-ring/40"
           >
             <Logo />

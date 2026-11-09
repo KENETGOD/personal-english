@@ -1,13 +1,14 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
-import { Settings } from "lucide-react";
+import { House, Settings } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "cn";
 
-// Only routes that exist today. F2 adds "Inicio" here.
+// Only routes that exist today.
 const ITEMS: { href: string; label: string; icon: LucideIcon }[] = [
+  { href: "/home", label: "Inicio", icon: House },
   { href: "/settings", label: "Ajustes", icon: Settings },
 ];
 

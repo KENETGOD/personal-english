@@ -36,9 +36,14 @@ test("sign up, confirm by email, log out and log in", async ({
     "Correo o contraseña incorrectos.",
   );
 
-  // Confirm through the emailed link: lands on settings with a session.
+  // Confirm through the emailed link: lands on the home screen with a session.
   await page.goto(await confirmationLink(email));
-  await expect(page).toHaveURL(/\/settings$/);
+  await expect(page).toHaveURL(/\/home$/);
+  await expect(page.getByTestId("streak-count")).toHaveText("0 días");
+  await expect(
+    page.getByRole("progressbar", { name: "Meta diaria" }),
+  ).toHaveAttribute("aria-valuenow", "0");
+  await page.goto("/settings");
   await expect(
     page.getByRole("heading", { name: "Ajustes", level: 1 }),
   ).toBeVisible();
@@ -51,9 +56,10 @@ test("sign up, confirm by email, log out and log in", async ({
   await page.getByLabel("Correo electrónico").fill(email);
   await page.getByLabel("Contraseña", { exact: true }).fill(PASSWORD);
   await page.getByRole("button", { name: "Iniciar sesión" }).click();
-  await expect(page).toHaveURL(/\/settings$/);
+  await expect(page).toHaveURL(/\/home$/);
 
   // Settings round trip.
+  await page.goto("/settings");
   await page.getByLabel("Nombre").fill("Ana");
   // Choice chips hide the native radio; force the click through the label.
   await page.getByRole("radio", { name: "20 min" }).check({ force: true });
