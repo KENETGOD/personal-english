@@ -434,5 +434,10 @@ enabled = true
 [remotes.dev]
 project_id = "dukkgijzkyqngljjyjwy"
 
+[remotes.dev.auth]
+site_url = "https://personal-english-eta.vercel.app"
+# Localhost stays allowed because local dev also points at this project.
+additional_redirect_urls = ["https://personal-english-eta.vercel.app/**", "http://localhost:3000/**"]
+
 [remotes.dev.auth.email]
 max_frequency = "1m0s"
