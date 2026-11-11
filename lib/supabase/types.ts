@@ -309,6 +309,131 @@ export type Database = {
         };
         Relationships: [];
       };
+      review_logs: {
+        Row: {
+          answer: string | null;
+          card_id: string;
+          elapsed_days: number;
+          id: string;
+          rating: number;
+          reviewed_at: string;
+          scheduled_days: number;
+          state: number;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          answer?: string | null;
+          card_id: string;
+          elapsed_days?: number;
+          id?: string;
+          rating: number;
+          reviewed_at?: string;
+          scheduled_days?: number;
+          state: number;
+          user_id: string;
+        };
+        Update: {
+          answer?: string | null;
+          card_id?: string;
+          elapsed_days?: number;
+          id?: string;
+          rating?: number;
+          reviewed_at?: string;
+          scheduled_days?: number;
+          state?: number;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "review_logs_card_id_user_id_fkey";
+            columns: ["card_id", "user_id"];
+            isOneToOne: false;
+            referencedRelation: "srs_cards";
+            referencedColumns: ["id", "user_id"];
+          },
+          {
+            foreignKeyName: "review_logs_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      srs_cards: {
+        Row: {
+          card_type: string;
+          content_id: string | null;
+          difficulty: number;
+          due: string;
+          elapsed_days: number;
+          error_id: string | null;
+          id: string;
+          lapses: number;
+          last_review: string | null;
+          learning_steps: number;
+          reps: number;
+          scheduled_days: number;
+          stability: number;
+          state: number;
+          suspended: boolean;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          card_type: string;
+          content_id?: string | null;
+          difficulty?: number;
+          due?: string;
+          elapsed_days?: number;
+          error_id?: string | null;
+          id?: string;
+          lapses?: number;
+          last_review?: string | null;
+          learning_steps?: number;
+          reps?: number;
+          scheduled_days?: number;
+          stability?: number;
+          state?: number;
+          suspended?: boolean;
+          user_id: string;
+        };
+        Update: {
+          card_type?: string;
+          content_id?: string | null;
+          difficulty?: number;
+          due?: string;
+          elapsed_days?: number;
+          error_id?: string | null;
+          id?: string;
+          lapses?: number;
+          last_review?: string | null;
+          learning_steps?: number;
+          reps?: number;
+          scheduled_days?: number;
+          stability?: number;
+          state?: number;
+          suspended?: boolean;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "srs_cards_content_id_fkey";
+            columns: ["content_id"];
+            isOneToOne: false;
+            referencedRelation: "content_items";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "srs_cards_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       streaks: {
         Row: {
           current_streak: number;
@@ -398,6 +523,33 @@ export type Database = {
           isSetofReturn: false;
         };
       };
+      add_vocab_card: {
+        Args: { p_content_id: string };
+        Returns: {
+          card_type: string;
+          content_id: string | null;
+          difficulty: number;
+          due: string;
+          elapsed_days: number;
+          error_id: string | null;
+          id: string;
+          lapses: number;
+          last_review: string | null;
+          learning_steps: number;
+          reps: number;
+          scheduled_days: number;
+          stability: number;
+          state: number;
+          suspended: boolean;
+          user_id: string;
+        };
+        SetofOptions: {
+          from: "*";
+          to: "srs_cards";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
       change_daily_goal: {
         Args: { p_minutes: number };
         Returns: {
@@ -478,6 +630,46 @@ export type Database = {
         SetofOptions: {
           from: "*";
           to: "practice_sessions";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
+      grade_card: {
+        Args: {
+          p_answer: string;
+          p_card_id: string;
+          p_difficulty: number;
+          p_due: string;
+          p_elapsed_days: number;
+          p_lapses: number;
+          p_learning_steps: number;
+          p_rating: number;
+          p_reps: number;
+          p_scheduled_days: number;
+          p_stability: number;
+          p_state: number;
+        };
+        Returns: {
+          card_type: string;
+          content_id: string | null;
+          difficulty: number;
+          due: string;
+          elapsed_days: number;
+          error_id: string | null;
+          id: string;
+          lapses: number;
+          last_review: string | null;
+          learning_steps: number;
+          reps: number;
+          scheduled_days: number;
+          stability: number;
+          state: number;
+          suspended: boolean;
+          user_id: string;
+        };
+        SetofOptions: {
+          from: "*";
+          to: "srs_cards";
           isOneToOne: true;
           isSetofReturn: false;
         };
