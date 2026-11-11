@@ -18,6 +18,7 @@ export async function saveSettings(
     accent: fd.get("accent") ?? "",
     playbackRate: fd.get("playbackRate") ?? "",
     interests: fd.getAll("interests"),
+    newCardsPerDay: fd.get("newCardsPerDay") ?? "",
   });
   if (!parsed.success) return validationFail(parsed.error);
   const s = parsed.data;
@@ -35,6 +36,7 @@ export async function saveSettings(
       accent: s.accent,
       playback_rate: s.playbackRate,
       interests: s.interests,
+      new_cards_per_day: s.newCardsPerDay,
     })
     .eq("id", user.id);
   if (error) {

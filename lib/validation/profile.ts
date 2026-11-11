@@ -26,6 +26,13 @@ export const settingsSchema = z.object({
   accent: z.enum(ACCENTS),
   playbackRate: z.coerce.number().pipe(z.literal(PLAYBACK_RATES)),
   interests: z.array(z.enum(INTERESTS)).max(INTERESTS.length),
+  // RF-VOC-04; the profiles column allows 0..50. A strict digit match keeps "" from coercing to 0.
+  newCardsPerDay: z
+    .string()
+    .trim()
+    .regex(/^\d{1,2}$/)
+    .transform(Number)
+    .pipe(z.number().max(50)),
 });
 
 export type SettingsInput = z.infer<typeof settingsSchema>;

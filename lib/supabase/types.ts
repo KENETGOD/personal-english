@@ -674,6 +674,7 @@ export type Database = {
           isSetofReturn: false;
         };
       };
+      new_words_today: { Args: Record<PropertyKey, never>; Returns: number };
       settle_streak: {
         Args: Record<PropertyKey, never>;
         Returns: {

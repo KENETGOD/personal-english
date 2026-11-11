@@ -26,6 +26,7 @@ type Props = {
     accent: string;
     playbackRate: number;
     interests: string[];
+    newCardsPerDay: number;
   };
   timezones: string[];
 };
@@ -138,6 +139,25 @@ export function SettingsForm({ initial, timezones }: Props) {
             </ChoiceChip>
           </div>
         </fieldset>
+
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="newCardsPerDay">Palabras nuevas por día</Label>
+          <Input
+            id="newCardsPerDay"
+            name="newCardsPerDay"
+            type="number"
+            inputMode="numeric"
+            min={0}
+            max={50}
+            step={1}
+            defaultValue={initial.newCardsPerDay}
+            required
+            aria-describedby="new-cards-hint"
+          />
+          <p id="new-cards-hint" className="text-sm text-muted-foreground">
+            De 0 a 50. Con 0 no se agregan palabras nuevas.
+          </p>
+        </div>
 
         <fieldset className="flex flex-col">
           <legend className="mb-2 text-sm font-bold">Temas de interés</legend>

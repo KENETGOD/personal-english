@@ -13,7 +13,7 @@ export default async function SettingsPage() {
   const { data: profile } = await supabase
     .from("profiles")
     .select(
-      "display_name, timezone, daily_goal_minutes, pending_daily_goal, accent, playback_rate, interests",
+      "display_name, timezone, daily_goal_minutes, pending_daily_goal, accent, playback_rate, interests, new_cards_per_day",
     )
     .eq("id", user.id)
     .single();
@@ -30,6 +30,7 @@ export default async function SettingsPage() {
           activeGoal: profile.daily_goal_minutes,
           accent: profile.accent,
           playbackRate: Number(profile.playback_rate) === 0.75 ? 0.75 : 1,
+          newCardsPerDay: profile.new_cards_per_day,
           interests: profile.interests.filter(
             (i): i is (typeof INTERESTS)[number] =>
               (INTERESTS as readonly string[]).includes(i),

@@ -99,6 +99,7 @@ describe("settingsSchema", () => {
     accent: "en-GB",
     playbackRate: "0.75",
     interests: ["travel", "work"],
+    newCardsPerDay: "15",
   };
 
   it("parses form strings into typed values", () => {
@@ -107,6 +108,7 @@ describe("settingsSchema", () => {
       displayName: "Ana",
       dailyGoal: 20,
       playbackRate: 0.75,
+      newCardsPerDay: 15,
     });
   });
 
@@ -117,6 +119,10 @@ describe("settingsSchema", () => {
     ["interest", { interests: ["sports"] }],
     ["name length", { displayName: "x".repeat(61) }],
     ["timezone", { timezone: "Nowhere/City" }],
+    ["new cards below 0", { newCardsPerDay: "-1" }],
+    ["new cards above 50", { newCardsPerDay: "51" }],
+    ["fractional new cards", { newCardsPerDay: "2.5" }],
+    ["empty new cards", { newCardsPerDay: "" }],
   ])("rejects an invalid %s", (_, patch) => {
     expect(settingsSchema.safeParse({ ...ok, ...patch }).success).toBe(false);
   });

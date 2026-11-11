@@ -43,9 +43,14 @@ describe("home components", () => {
     expect(screen.getByText("20 XP hoy")).toBeInTheDocument();
   });
 
-  it("lists the five modes without links", () => {
+  it("lists the five modes and links only the built ones", () => {
     render(<ModeGrid />);
     expect(screen.getAllByRole("listitem")).toHaveLength(5);
-    expect(screen.queryByRole("link")).toBeNull();
+    expect(screen.getAllByRole("link")).toHaveLength(1);
+    expect(screen.getByRole("link", { name: /Vocabulary/ })).toHaveAttribute(
+      "href",
+      "/vocabulary/new",
+    );
+    expect(screen.getAllByText("Próximamente")).toHaveLength(4);
   });
 });
