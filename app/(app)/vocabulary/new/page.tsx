@@ -60,7 +60,7 @@ async function NewWords() {
   if (overdue > OVERDUE_PAUSE_LIMIT) {
     return (
       <p>
-        Tienes muchos repasos vencidos ({overdue}). Ponte al d�a antes de
+        Tienes muchos repasos vencidos ({overdue}). Ponte al día antes de
         aprender palabras nuevas:{" "}
         <Link href="/vocabulary" className="font-bold underline">
           ir a repasar
