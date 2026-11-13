@@ -38,18 +38,24 @@ export function toWord(row: { id: string; payload: unknown }): Word | null {
   };
 }
 
+/** New words are paused while more reviews than this are overdue (docs/02 section 3.1). */
+export const OVERDUE_PAUSE_LIMIT = 100;
+
 /** Words to offer now: those without a card yet, up to what is left of today's limit (RF-VOC-04). */
 export function selectNewWords<T extends { id: string }>({
   candidates,
   ownedIds,
   limit,
   learnedToday,
+  overdue = 0,
 }: {
   candidates: T[];
   ownedIds: ReadonlySet<string>;
   limit: number;
   learnedToday: number;
+  overdue?: number;
 }): T[] {
+  if (overdue > OVERDUE_PAUSE_LIMIT) return [];
   const remaining = Math.max(0, limit - learnedToday);
   return candidates.filter((c) => !ownedIds.has(c.id)).slice(0, remaining);
 }

@@ -16,7 +16,7 @@ const MODES: {
     hint: "Palabras y repaso",
     icon: Languages,
     tint: "bg-mode-vocabulary text-mode-vocabulary-foreground",
-    href: "/vocabulary/new",
+    href: "/vocabulary",
   },
   {
     name: "Reading",

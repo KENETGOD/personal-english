@@ -5,6 +5,7 @@ import { ReviewsCard } from "@/components/home/reviews-card";
 import { StreakHeader } from "@/components/home/streak-header";
 import { requireUser } from "@/lib/auth/require-user";
 import { goalProgress } from "@/lib/domain/goal-progress";
+import { countDueCards } from "@/lib/supabase/due-cards";
 
 export const metadata = { title: "Inicio · English Coach" };
 
@@ -15,6 +16,7 @@ export default async function HomePage() {
   // settle_streak first: it applies pending freezes/breaks that today_progress then reflects.
   const streak = await supabase.rpc("settle_streak");
   const today = await supabase.rpc("today_progress").single();
+  const due = await countDueCards(supabase);
   if (streak.error || today.error) throw new Error("Could not load progress");
 
   const progress = goalProgress({
@@ -33,7 +35,7 @@ export default async function HomePage() {
       />
       <GoalRing progress={progress} />
       <ModeGrid />
-      <ReviewsCard count={0} />
+      <ReviewsCard count={due} />
     </main>
   );
 }

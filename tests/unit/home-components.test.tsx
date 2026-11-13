@@ -2,6 +2,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { GoalRing } from "@/components/home/goal-ring";
 import { ModeGrid } from "@/components/home/mode-grid";
+import { ReviewsCard } from "@/components/home/reviews-card";
 import { StreakHeader } from "@/components/home/streak-header";
 import { goalProgress } from "@/lib/domain/goal-progress";
 
@@ -49,8 +50,19 @@ describe("home components", () => {
     expect(screen.getAllByRole("link")).toHaveLength(1);
     expect(screen.getByRole("link", { name: /Vocabulary/ })).toHaveAttribute(
       "href",
-      "/vocabulary/new",
+      "/vocabulary",
     );
     expect(screen.getAllByText("Próximamente")).toHaveLength(4);
+  });
+
+  it("links the due reviews to the review screen only when there are some", () => {
+    const { rerender } = render(<ReviewsCard count={3} />);
+    expect(screen.getByText("Repasos pendientes: 3")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Repasar ahora" })).toHaveAttribute(
+      "href",
+      "/vocabulary",
+    );
+    rerender(<ReviewsCard count={0} />);
+    expect(screen.queryByRole("link")).not.toBeInTheDocument();
   });
 });

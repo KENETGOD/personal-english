@@ -1,10 +1,26 @@
 import { describe, expect, it } from "vitest";
-import { selectNewWords, toWord } from "@/lib/domain/new-words";
+import {
+  OVERDUE_PAUSE_LIMIT,
+  selectNewWords,
+  toWord,
+} from "@/lib/domain/new-words";
 
 const ids = (xs: { id: string }[]) => xs.map((x) => x.id);
 const items = ["a", "b", "c", "d"].map((id) => ({ id }));
 
 describe("selectNewWords", () => {
+  it("pauses new words while more than 100 reviews are overdue", () => {
+    const args = {
+      candidates: items,
+      ownedIds: new Set<string>(),
+      limit: 10,
+      learnedToday: 0,
+    };
+    expect(OVERDUE_PAUSE_LIMIT).toBe(100);
+    expect(selectNewWords({ ...args, overdue: 101 })).toEqual([]);
+    expect(selectNewWords({ ...args, overdue: 100 })).toHaveLength(4);
+  });
+
   it("takes the first words up to the daily limit", () => {
     expect(
       ids(

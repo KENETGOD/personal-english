@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { RefreshCw } from "lucide-react";
 
-/** Spaced repetition arrives in F3, so the count is always zero for now. */
 export function ReviewsCard({ count }: { count: number }) {
   return (
     <section
@@ -20,6 +20,11 @@ export function ReviewsCard({ count }: { count: number }) {
             ? "No tienes repasos por ahora. Aparecerán cuando aprendas palabras nuevas."
             : "Repasa para fijar lo aprendido."}
         </p>
+        {count > 0 && (
+          <Link href="/vocabulary" className="text-sm font-bold underline">
+            Repasar ahora
+          </Link>
+        )}
       </div>
     </section>
   );
